@@ -8,7 +8,7 @@ Multiple regression aims to predict the value of a dependent variable (also call
 
     Y = β0 + β1X1 + β2X2 + ... + βnXn + ε
 
-    where:
+    where :
     - Y is the dependent variable.
     - X1, X2, ..., Xn are the independent variables.
     - β0 is the intercept.
