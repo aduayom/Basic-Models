@@ -1,2 +1,2 @@
 # Basic-Models
-Synthèse des codes python pour les modèles assez basique
+Synthèse des codes python & R pour les modèles assez basique
