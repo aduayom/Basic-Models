@@ -26,6 +26,14 @@
         "documentation": {}
     },
     {
+        "label": "metrics",
+        "importPath": "sklearn",
+        "description": "sklearn",
+        "isExtraImport": true,
+        "detail": "sklearn",
+        "documentation": {}
+    },
+    {
         "label": "linear_model",
         "importPath": "sklearn",
         "description": "sklearn",
@@ -57,6 +65,30 @@
         "description": "scipy",
         "isExtraImport": true,
         "detail": "scipy",
+        "documentation": {}
+    },
+    {
+        "label": "pyplot",
+        "importPath": "matplotlib",
+        "description": "matplotlib",
+        "isExtraImport": true,
+        "detail": "matplotlib",
+        "documentation": {}
+    },
+    {
+        "label": "train_test_split",
+        "importPath": "sklearn.model_selection",
+        "description": "sklearn.model_selection",
+        "isExtraImport": true,
+        "detail": "sklearn.model_selection",
+        "documentation": {}
+    },
+    {
+        "label": "LogisticRegression",
+        "importPath": "sklearn.linear_model",
+        "description": "sklearn.linear_model",
+        "isExtraImport": true,
+        "detail": "sklearn.linear_model",
         "documentation": {}
     },
     {
@@ -138,6 +170,78 @@
         "description": "Linear regression.Linear_regression",
         "peekOfCode": "df = pd.read_csv('other_files/cells.csv')\nimport seaborn as sns\nsns.set(style='darkgrid')\nsns.lmplot(x='time', y='cells', data=df, order=1)\n#If you want equation, not possible to display in seaborn but you can get it the\n#regular way using scipy stats module. \nfrom scipy import stats\nslope, intercept, r_value, p_value, std_err = stats.linregress(df['time'],df['cells'])\nprint(slope, intercept)\n#Compare the slope and intercept reported with m and b values from above.",
         "detail": "Linear regression.Linear_regression",
+        "documentation": {}
+    },
+    {
+        "label": "df",
+        "kind": 5,
+        "importPath": "Logistic regression.Logistic_regression",
+        "description": "Logistic regression.Logistic_regression",
+        "peekOfCode": "df = pd.read_csv(\"other_files/images_analyzed_productivity1.csv\")\nprint(df.head())\n#plt.scatter(df.Age, df.Productivity, marker='+', color='red')\n#plt.scatter(df.Time, df.Productivity, marker='+', color='red')\n#plt.scatter(df.Coffee, df.Productivity, marker='+', color='red')\n#PLot productivity values to see the split between Good and Bad\nsizes = df['Productivity'].value_counts(sort = 1)\nplt.pie(sizes, shadow=True, autopct='%1.1f%%')\n#Good to know so we know the proportion of each label\n#STEP 2: DROP IRRELEVANT DATA",
+        "detail": "Logistic regression.Logistic_regression",
+        "documentation": {}
+    },
+    {
+        "label": "sizes",
+        "kind": 5,
+        "importPath": "Logistic regression.Logistic_regression",
+        "description": "Logistic regression.Logistic_regression",
+        "peekOfCode": "sizes = df['Productivity'].value_counts(sort = 1)\nplt.pie(sizes, shadow=True, autopct='%1.1f%%')\n#Good to know so we know the proportion of each label\n#STEP 2: DROP IRRELEVANT DATA\n#In our example, Images_Analyzed reflects whether it is good analysis or bad\n#so should not include it. ALso, User number is just a number and has no inflence\n#on the productivity, so we can drop it.\ndf.drop(['Images_Analyzed'], axis=1, inplace=True)\ndf.drop(['User'], axis=1, inplace=True)\n#STEP 3: Handle missing values, if needed",
+        "detail": "Logistic regression.Logistic_regression",
+        "documentation": {}
+    },
+    {
+        "label": "#df",
+        "kind": 5,
+        "importPath": "Logistic regression.Logistic_regression",
+        "description": "Logistic regression.Logistic_regression",
+        "peekOfCode": "#df = df.dropna()  #Drops all rows with at least one null value. \n#STEP 4: Convert non-numeric to numeric, if needed.\n#Sometimes we may have non-numeric data, for example batch name, user name, city name, etc.\n#e.g. if data is in the form of YES and NO then convert to 1 and 2\ndf.Productivity[df.Productivity == 'Good'] = 1\ndf.Productivity[df.Productivity == 'Bad'] = 2\nprint(df.head())\n#STEP 5: PREPARE THE DATA.\n#Y is the data with dependent variable, this is the Productivity column\nY = df[\"Productivity\"].values  #At this point Y is an object not of type int",
+        "detail": "Logistic regression.Logistic_regression",
+        "documentation": {}
+    },
+    {
+        "label": "Y",
+        "kind": 5,
+        "importPath": "Logistic regression.Logistic_regression",
+        "description": "Logistic regression.Logistic_regression",
+        "peekOfCode": "Y = df[\"Productivity\"].values  #At this point Y is an object not of type int\n#Convert Y to int\nY=Y.astype('int')\n#X is data with independent variables, everything except Productivity column\n# Drop label column from X as you don't want that included as one of the features\nX = df.drop(labels = [\"Productivity\"], axis=1)  \n#print(X.head())\n#STEP 6: SPLIT THE DATA into TRAIN AND TEST data.\nfrom sklearn.model_selection import train_test_split\nX_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.4, random_state=20)",
+        "detail": "Logistic regression.Logistic_regression",
+        "documentation": {}
+    },
+    {
+        "label": "X",
+        "kind": 5,
+        "importPath": "Logistic regression.Logistic_regression",
+        "description": "Logistic regression.Logistic_regression",
+        "peekOfCode": "X = df.drop(labels = [\"Productivity\"], axis=1)  \n#print(X.head())\n#STEP 6: SPLIT THE DATA into TRAIN AND TEST data.\nfrom sklearn.model_selection import train_test_split\nX_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.4, random_state=20)\n#random_state can be any integer and it is used as a seed to randomly split dataset.\n#By doing this we work with same test dataset evry time, if this is important.\n#random_state=None splits dataset randomly every time\n#print(X_train)\n#STEP 7: Defining the model and training.",
+        "detail": "Logistic regression.Logistic_regression",
+        "documentation": {}
+    },
+    {
+        "label": "model",
+        "kind": 5,
+        "importPath": "Logistic regression.Logistic_regression",
+        "description": "Logistic regression.Logistic_regression",
+        "peekOfCode": "model = LogisticRegression()  #Create an instance of the model.\nmodel.fit(X_train, y_train)  # Train the model using training data\n#STEP 8: TESTING THE MODEL BY PREDICTING ON TEST DATA\n#AND CALCULATE THE ACCURACY SCORE\nprediction_test = model.predict(X_test)\nfrom sklearn import metrics\n#Print the prediction accuracy\nprint (\"Accuracy = \", metrics.accuracy_score(y_test, prediction_test))\n#Test accuracy for various test sizes and see how it gets better with more training data\n#UNDERSTAND WHICH VARIABLES HAVE MOST INFLUENCE ON THE OUTCOME",
+        "detail": "Logistic regression.Logistic_regression",
+        "documentation": {}
+    },
+    {
+        "label": "prediction_test",
+        "kind": 5,
+        "importPath": "Logistic regression.Logistic_regression",
+        "description": "Logistic regression.Logistic_regression",
+        "peekOfCode": "prediction_test = model.predict(X_test)\nfrom sklearn import metrics\n#Print the prediction accuracy\nprint (\"Accuracy = \", metrics.accuracy_score(y_test, prediction_test))\n#Test accuracy for various test sizes and see how it gets better with more training data\n#UNDERSTAND WHICH VARIABLES HAVE MOST INFLUENCE ON THE OUTCOME\n# To get the weights of all the variables\nprint(model.coef_) #Print the coefficients for each independent variable. \n#But it is not clear which one corresponds to what.\n#SO let us print both column values and coefficients. ",
+        "detail": "Logistic regression.Logistic_regression",
+        "documentation": {}
+    },
+    {
+        "label": "weights",
+        "kind": 5,
+        "importPath": "Logistic regression.Logistic_regression",
+        "description": "Logistic regression.Logistic_regression",
+        "peekOfCode": "weights = pd.Series(model.coef_[0], index=X.columns.values)\nprint(\"Weights for each variables is a follows...\")\nprint(weights)\n#+VE VALUE INDICATES THAT THE VARIABLE HAS A POSITIVE IMPACT",
+        "detail": "Logistic regression.Logistic_regression",
         "documentation": {}
     },
     {
